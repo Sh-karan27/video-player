@@ -4,10 +4,9 @@ import Home from "./screens/Home";
 import About from "./screens/About";
 import Error from "./screens/Error";
 import Login from "./screens/Login";
-import AuthWrapper from "./components/AuthWrapper"; // Ensure no BrowserRouter here
 import { useDispatch } from "react-redux";
 import { refreshAccessToken } from "./store/slices/authSlice";
-
+import "./index.css";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
