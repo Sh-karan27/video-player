@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Home from "./screens/Home";
-import About from "./screens/About";
-import Error from "./screens/Error";
-import Login from "./screens/Login";
-import { useDispatch } from "react-redux";
-import { refreshAccessToken } from "./store/slices/authSlice";
-import "./index.css";
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Home from './screens/Home';
+import About from './screens/About';
+import Error from './screens/Error';
+import Login from './screens/Login';
+import { useDispatch } from 'react-redux';
+import { refreshAccessToken } from './store/slices/authSlice';
+import Navbar from './components/Navbar';
+import './index.css';
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,8 +16,8 @@ const App = () => {
 
   useEffect(() => {
     const checkTokens = async () => {
-      const accessToken = localStorage.getItem("accessToken");
-      const refreshToken = localStorage.getItem("refreshToken");
+      const accessToken = localStorage.getItem('accessToken');
+      const refreshToken = localStorage.getItem('refreshToken');
 
       if (refreshToken) {
         try {
@@ -37,27 +39,23 @@ const App = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className='flex'>
       <BrowserRouter>
-        {" "}
-        {/* Only one BrowserRouter */}
         {isAuthenticated ? (
           <>
-            {/* <Navbar /> */}
-            <div className="flex-grow">
+            <Navbar />
+            <div className='flex-grow'>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                {/* <Route path="/blogs" element={<Blog />} /> */}
-                <Route path="*" element={<Error />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/about' element={<About />} />
+                <Route path='*' element={<Error />} />
               </Routes>
             </div>
-            {/* <Footer /> */}
           </>
         ) : (
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='*' element={<Navigate to='/login' />} />
           </Routes>
         )}
       </BrowserRouter>
