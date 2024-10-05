@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AiOutlineHome, AiOutlineMenu, AiOutlineClose } from "react-icons/ai"; // Icons
 import {
-  AiOutlineHome,
-  AiOutlinePlayCircle,
-  AiOutlineInfoCircle,
-  AiOutlineMenu,
-  AiOutlineClose,
-} from "react-icons/ai"; // Icons
+  MdDashboard,
+  MdOutlinePlaylistAdd,
+  MdHistoryToggleOff,
+} from "react-icons/md"; // Icons
+import { FaVideo, FaUsers } from "react-icons/fa"; // Icons for Videos and Subscribers
+import { GrChannel } from "react-icons/gr";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../store/slices/authSlice";
-
+import { SlLike } from "react-icons/sl";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -69,32 +70,70 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to="/about"
+            to="/dashboard"
             className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
             activeClassName="bg-gray-800"
-            title="about"
+            title="dashboard"
           >
-            <AiOutlineInfoCircle className="text-2xl text-main-text" />
-            {isOpen && <span>About</span>}
+            <MdDashboard className="text-2xl text-main-text" />
+            {isOpen && <span>Dashboard</span>}
           </NavLink>
 
           <NavLink
-            to="/playlists"
+            to="/channel"
             className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
             activeClassName="bg-gray-800"
-            title="playlists"
+            title="channel"
           >
-            <AiOutlinePlayCircle className="text-2xl text-main-text" />
-            {isOpen && <span>Playlists</span>}
+            <GrChannel className="text-2xl text-main-text" />
+            {isOpen && <span>Channel</span>}
+          </NavLink>
+          <NavLink
+            to="/playlist"
+            className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
+            activeClassName="bg-gray-800"
+            title="channel"
+          >
+            <MdOutlinePlaylistAdd className="text-2xl text-main-text" />
+            {isOpen && <span>Playlist</span>}
           </NavLink>
 
+          <NavLink
+            to="/liked-video"
+            className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
+            activeClassName="bg-gray-800"
+            title="liked videos"
+          >
+            <SlLike className="text-2xl text-main-text" />
+            {isOpen && <span>Liked Videos</span>}
+          </NavLink>
+
+          <NavLink
+            to="/your-video"
+            className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
+            activeClassName="bg-gray-800"
+            title="your videos"
+          >
+            <FaVideo className="text-2xl text-main-text" />
+            {isOpen && <span>Your Videos</span>}
+          </NavLink>
+
+          <NavLink
+            to="/subscribers"
+            className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
+            activeClassName="bg-gray-800"
+            title="subscribers"
+          >
+            <FaUsers className="text-2xl text-main-text" />
+            {isOpen && <span>Subscribers</span>}
+          </NavLink>
           <NavLink
             to="/history"
             className="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md"
             activeClassName="bg-gray-800"
-            title="history"
+            title="subscribers"
           >
-            <AiOutlinePlayCircle className="text-2xl text-main-text" />
+            <MdHistoryToggleOff className="text-2xl text-main-text" />
             {isOpen && <span>History</span>}
           </NavLink>
         </nav>
