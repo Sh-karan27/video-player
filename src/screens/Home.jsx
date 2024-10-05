@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { logoutUser } from '../store/slices/authSlice';
 
@@ -7,6 +7,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const { user, loading, error } = useSelector((state) => state.auth);
 
   const handleLogout = () => {
     dispatch(logoutUser()).then((result) => {
@@ -18,6 +20,15 @@ const Home = () => {
     });
   };
 
+  if (loading) {
+    return <div>Loading</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  console.log(user);
   return (
     <div>
       Home
