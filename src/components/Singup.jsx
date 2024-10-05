@@ -61,7 +61,7 @@ const Signup = ({ setSignUp }) => {
         onSubmit={handleSubmit}
         className="w-full h-full flex flex-col items-center justify-evenly"
       >
-        <label className="flex flex-col text-secondary-text w-full">
+        <label className="flex flex-col text-main-text w-full">
           Full Name
           <input
             type="text"
@@ -70,11 +70,11 @@ const Signup = ({ setSignUp }) => {
             value={formData.fullName}
             onChange={handleChange}
             required
-            className="mt-1 p-2 text-main-text focus:border-main-text border-b bg-[transparent] outline-none"
+            className="mt-1 p-2 text-secondary-text focus:border-main-text border-b bg-[transparent] outline-none"
           />
         </label>
 
-        <label className="flex flex-col text-secondary-text w-full">
+        <label className="flex flex-col text-main-text w-full">
           Username
           <input
             type="text"
@@ -83,11 +83,11 @@ const Signup = ({ setSignUp }) => {
             value={formData.username}
             onChange={handleChange}
             required
-            className="mt-1 p-2 text-main-text focus:border-main-text border-b bg-[transparent] outline-none"
+            className="mt-1 p-2 text-secondary-text focus:border-main-text border-b bg-[transparent] outline-none"
           />
         </label>
 
-        <label className="flex flex-col text-secondary-text w-full">
+        <label className="flex flex-col text-main-text w-full">
           Email Address
           <input
             type="email"
@@ -96,11 +96,11 @@ const Signup = ({ setSignUp }) => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="mt-1 p-2 text-main-text focus:border-main-text border-b bg-[transparent] outline-none"
+            className="mt-1 p-2 text-secondary-text focus:border-main-text border-b bg-[transparent] outline-none"
           />
         </label>
 
-        <label className="flex flex-col text-secondary-text w-full">
+        <label className="flex flex-col text-main-text w-full">
           Password
           <input
             type="password"
@@ -109,7 +109,7 @@ const Signup = ({ setSignUp }) => {
             value={formData.password}
             onChange={handleChange}
             required
-            className="mt-1 p-2 text-main-text focus:border-main-text border-b bg-[transparent] outline-none"
+            className="mt-1 p-2 text-secondary-text focus:border-main-text border-b bg-[transparent] outline-none"
           />
         </label>
 
