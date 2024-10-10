@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AiOutlineHome, AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'; // Icons
 import {
@@ -8,9 +8,10 @@ import {
 } from 'react-icons/md'; // Icons
 import { FaVideo, FaUsers } from 'react-icons/fa'; // Icons for Videos and Subscribers
 import { GrChannel } from 'react-icons/gr';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../store/slices/authSlice';
 import { SlLike } from 'react-icons/sl';
+import { getCurrentUser } from '../store/slices/userSlice';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +23,12 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
+
+  const { data, error, loading } = useSelector((state) => state.user);
+
   const handleLogout = () => {
     dispatch(logoutUser()).then((result) => {
       const token = localStorage.getItem('accessToken');
@@ -31,6 +38,12 @@ const Navbar = () => {
       window.location.reload();
     });
   };
+
+  if (error) {
+    alert('Error getting profile');
+  }
+
+  // console.log(data);
 
   return (
     <div
@@ -74,24 +87,6 @@ const Navbar = () => {
               }`}
             />
             {isOpen && <span>Home</span>}
-          </NavLink>
-
-          <NavLink
-            to='/dashboard'
-            className={({ isActive }) =>
-              `flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-md transition-colors duration-500 ease-in-out ${
-                isActive ? 'bg-gray-800' : ''
-              }`
-            }
-            title='dashboard'>
-            <MdDashboard
-              className={`text-2xl text-main-text transition-transform duration-500 ease-in-out ${
-                isOpen
-                  ? 'transform translate-x-0'
-                  : 'transform translate-x-[-50%]'
-              }`}
-            />
-            {isOpen && <span>Dashboard</span>}
           </NavLink>
 
           <NavLink
@@ -207,6 +202,18 @@ const Navbar = () => {
       {/* Logout Button (Fixed at the bottom) */}
       {isOpen && (
         <div className='absolute bottom-4 left-0 right-0 p-4 transition-all duration-500 ease-in-out'>
+          {loading ? (
+            <div>Loading</div>
+          ) : (
+            <div className='flex items-center justify-left p-4 gap-2'>
+              <img
+                src={data?.avatar}
+                alt='profile'
+                className='w-10 h-10 rounded-full'
+              />
+              <h1 className='text-md text-secondary-text '>{data?.username}</h1>
+            </div>
+          )}
           <button
             onClick={handleLogout}
             className='border border-black hover:bg-black hover:text-white rounded-3xl px-5 py-1 font-semibold w-full transition-colors duration-500 ease-in-out'>

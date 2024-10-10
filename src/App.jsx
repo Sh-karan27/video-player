@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { refreshAccessToken } from "./store/slices/authSlice";
 import Navbar from "./components/Navbar";
 import "./index.css";
-import Dashboard from "./screens/Dashboard";
 import Channel from "./screens/Channel";
 import LikedVideos from "./screens/LikedVideos";
 import YourVideos from "./screens/YourVideos";
@@ -55,7 +54,6 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/channel" element={<Channel />} />
                 <Route path="/liked-video" element={<LikedVideos />} />
                 <Route path="/your-video" element={<YourVideos />} />
