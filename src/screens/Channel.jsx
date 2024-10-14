@@ -41,7 +41,7 @@ const Channel = () => {
             alt="YouTube Channel Banner"
             className="w-full h-[30vw] sm:h-[15vw] object-cover rounded-xl"
           />
-          <div className="bg-background-secondary p-2 rounded-full cursor-pointer absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div title="update-cover-image" className="bg-background-secondary p-2 rounded-full cursor-pointer absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <CiEdit
               onClick={() => handleCoverImageEidtClick()}
               className="  text-main-text text-3xl font-light rounded-full "
