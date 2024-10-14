@@ -1,15 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateCoverImage } from '../store/slices/userSlice';
+import { updateAvatar } from '../store/slices/userSlice';
+import { ImCross } from 'react-icons/im';
 import { IoIosArrowBack } from 'react-icons/io';
 
-const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
-  const [file, setFile] = useState(null);
+const EditAvatar = ({ isOpen, onClose, onUpdate }) => {
+  const [profile, setProfile] = useState();
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    setProfile(e.target.files[0]);
   };
 
   const handleClick = () => {
@@ -24,8 +25,9 @@ const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('coverImage', file);
-    dispatch(updateCoverImage(formData))
+    formData.append('avatar', profile);
+
+    dispatch(updateAvatar(formData))
       .then(() => onUpdate())
       .then(() => onClose());
   };
@@ -35,11 +37,11 @@ const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
   }
 
   return (
-    <div className='fixed inset-0 flex flex-col items-center justify-center  '>
-      <div className='w-1/3 h-[15rem] flex flex-col items-center justify-evenly  bg-white p-4 bg-background-secondary  rounded-md'>
+    <div className='fixed inset-0 flex flex-col items-center justify-center bg-opacity-70 bg-black p-4'>
+      <div className='w-1/3 bg-background-secondary h-[15rem] flex flex-col items-center justify-evenly   p-4 rounded-md'>
         <div className='w-full'>
           <button
-            className=' flex items-center justify-center  text-main-text hover:text-secondary-text cursor-pointer '
+            className='text-main-text hover:text-secondary-text flex items-center justify-center'
             onClick={handleClick}>
             <IoIosArrowBack />
             Go Back
@@ -48,9 +50,8 @@ const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
 
         <div className='w-full flex flex-col items-center justify-center gap-5'>
           <h2 className='text-lg font-semibold mb-2 text-secondary-text'>
-            Update Cover Image
+            Update Profile Image
           </h2>
-
           {/* Hidden file input */}
           <input
             type='file'
@@ -59,20 +60,18 @@ const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
             ref={fileInputRef}
             style={{ display: 'none' }}
           />
-
-          {/* Custom styled button */}
+          {/* Custom styled button for file input */}
           <button
             type='button'
             onClick={handleFileInputClick}
-            className=' bg-background-primary text-main-text hover:text-secondary-text border-background-primary hover:bg-background-secondary border  hover:border-main-text  py-2 px-4 rounded-md '>
+            className=' bg-background-primary text-main-text hover:text-secondary-text border-background-primary hover:bg-background-secondary border  hover:border-main-text  py-2 px-4 rounded-md'>
             Choose File
           </button>
-
           {/* Submit button */}
           <button
+            onClick={handleSubmit}
             type='submit'
-            className='  text-secondary-text p-2 rounded-md'
-            onClick={handleSubmit}>
+            className='text-secondary-text py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'>
             Submit
           </button>
         </div>
@@ -81,4 +80,4 @@ const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
   );
 };
 
-export default EditCoverImage;
+export default EditAvatar;
