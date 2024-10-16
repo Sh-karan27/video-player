@@ -67,6 +67,9 @@ export const updateAvatar = createAsyncThunk(
   }
 );
 
+
+// export const getUserChannelProfile
+
 const userSlice = createSlice({
   name: 'user',
   initialState,

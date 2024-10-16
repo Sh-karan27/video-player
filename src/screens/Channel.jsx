@@ -4,6 +4,7 @@ import { getCurrentUser } from '../store/slices/userSlice';
 import { CiEdit } from 'react-icons/ci';
 import EditCoverImage from '../components/EditCoverImage';
 import EditAvatar from '../components/EditAvatar';
+import { RiLockPasswordFill } from 'react-icons/ri';
 
 const Channel = () => {
   const [editCoverImage, setEditCoverImage] = useState(false);
@@ -13,6 +14,13 @@ const Channel = () => {
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
+
+
+  useEffect(() => {
+    if (data && data._id) {
+      dispatch()
+    }
+  },[dispatch,data])
 
   const { data, error, loading } = useSelector((state) => state.user);
 
@@ -70,6 +78,33 @@ const Channel = () => {
                   className='text-main-text  text-3xl font-light rounded-full'
                 />
               </div>
+            </div>
+            <div className='flex flex-col items-center sm:items-start justify-center text-center sm:text-left'>
+              <h1 className='text-2xl sm:text-3xl font-bold text-main-text'>
+                {data?.username}
+              </h1>
+              <h3 className='text-lg sm:text-xl font-semibold text-secondary-text'>
+                {data?.email}
+              </h3>
+              {/* <p className='text-base sm:text-lg text-gray-500'>{user?.bio}</p> */}
+              <div className='flex gap-2'>
+                <h1
+                  className='text-gray-500 text-lg  text-secondary-text'
+                  onClick={() => handleFollowerBox()}>
+                  Followers: <span>89</span>
+                </h1>
+                <h1
+                  className='text-gray-500 text-lg   text-secondary-text'
+                  onClick={() => handleFollowingBox()}>
+                  Following: <span>89</span>
+                </h1>
+              </div>
+              <button
+                className='flex items-center justify-center gap-1 text-blue-500 underline cursor-pointer text-secondary-text'
+                // onClick={handleChangePasswordClick}
+              >
+                Change Password <RiLockPasswordFill />
+              </button>
             </div>
           </div>
         </div>
