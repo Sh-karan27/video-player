@@ -33,6 +33,8 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
+    console.log(email);
+    console.log(password);
     try {
       const response = await axiosInstance.post("/users/login", {
         email,
@@ -115,7 +117,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message;
+        state.error = action.payload;
         toast.error("failed to login");
       })
       .addCase(loginUser.fulfilled, (state, action) => {
