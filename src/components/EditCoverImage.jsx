@@ -35,7 +35,7 @@ const EditCoverImage = ({ isOpen, onClose, onUpdate }) => {
   }
 
   return (
-    <div className='fixed inset-0 flex flex-col items-center justify-center  '>
+    <div className='fixed inset-0 flex flex-col items-center justify-center '>
       <div className='w-1/3 h-[15rem] flex flex-col items-center justify-evenly  bg-white p-4 bg-background-secondary  rounded-md'>
         <div className='w-full'>
           <button
