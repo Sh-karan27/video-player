@@ -1,8 +1,8 @@
 import {
   createSlice,
-  asyncThunkCreator,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
+import { axiosInstance } from "../../axiosInstance";
 
 const intialState = {
   loading: null,
@@ -14,7 +14,12 @@ export const getAllUserVideo = createAsyncThunk(
   "video/allUserVideo",
   async ({ userId }, { rejectWithValue }) => {
     try {
-    } catch (error) {}
+      const response = await axiosInstance.get(`/videos/${userId}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -36,6 +41,19 @@ const videoSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.data = action.payload;
+      })
+      .addCase(getAllUserVideo.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getAllUserVideo.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getAllUserVideo.fulfilled, (state) => {
+        state.loading = false;
+        state.data = action.payload;
+        state.error = false;
       });
   },
 });
